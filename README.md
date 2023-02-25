@@ -2,12 +2,6 @@
 
 > This extension adds syntax highlighting of custom EvntJSON (NOT JSON/JSON5 compatible!) files in VS Code.
 
-## Colorization
-
-![JSON5 syntax in VS Code](https://cloud.githubusercontent.com/assets/7034281/19013821/e8150e9a-87e4-11e6-9127-e9ec7c989c86.png)
-
-(imported from [Atom package](https://github.com/wiredmax/language-json5))
-
 ## Usage
 
 ### Install the extension in VS Code

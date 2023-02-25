@@ -16,7 +16,15 @@ multi-line string',
     delta: +10,
     to: Infinity,   // and beyond!
 
-    finally: 'a trailing comma',
+    "sub": {
+        "//comment:xxx": "Bumm",
+        tripleMultiline: ```
+Hell'o
+World!
+```,
+        tripleSingleline: ```Hello```,
+        finally: 'a trailing comma',
+    },
     oh: [
         "we shouldn't forget",
         'arrays can have',

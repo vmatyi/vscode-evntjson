@@ -1,0 +1,247 @@
+{
+	"scopeName": "source.evntjson",
+	"fileTypes": ["evntjson"],
+	"name": "EvntJSON",
+	"patterns": [
+		{ "include": "#comments" },
+		{ "include": "#value" }
+	],
+	"repository": {
+		"array": {
+			"begin": "\\[",
+			"beginCaptures": {
+				"0": { "name": "punctuation.definition.array.begin.evntjson" }
+			},
+			"end": "\\]",
+			"endCaptures": {
+				"0": { "name": "punctuation.definition.array.end.evntjson" }
+			},
+			"name": "meta.structure.array.evntjson",
+			"patterns": [
+				{ "include": "#comments" },
+				{ "include": "#value" },
+				{
+					"match": ",",
+					"name": "punctuation.separator.array.evntjson"
+				},
+				{
+					"match": "[^\\s\\]]",
+					"name": "invalid.illegal.expected-array-separator.evntjson"
+				}
+			]
+		},
+		"constant": {
+			"match": "\\b(?:true|false|null|Infinity|NaN)\\b",
+			"name": "constant.language.evntjson"
+		},
+		"infinity": {
+			"match": "(-)*\\b(?:Infinity|NaN)\\b",
+			"name": "constant.language.evntjson"
+		},
+		"number": {
+			"patterns": [
+				{
+					"comment": "hexadecimal numbers",
+					"match": "(0x)[0-9a-fA-f]*",
+					"name": "constant.hex.numeric.evntjson"
+				},
+				{
+					"comment": "integer and decimal numbers",
+					"match": "[+-.]?(?=[1-9]|0(?!\\d))\\d+(\\.\\d+)?([eE][+-]?\\d+)?",
+					"name": "constant.dec.numeric.evntjson"
+				}
+			]
+		},
+		"object": {
+			"begin": "\\{",
+			"beginCaptures": {
+				"0": { "name": "punctuation.definition.dictionary.begin.evntjson" }
+			},
+			"comment": "evntjson object",
+			"end": "\\}",
+			"endCaptures": {
+				"0": { "name": "punctuation.definition.dictionary.end.evntjson" }
+			},
+			"name": "meta.structure.dictionary.evntjson",
+			"patterns": [
+				{ "include": "#comments" },
+				{
+					"comment": "object key",
+					"include": "#key"
+				},
+				{
+					"begin": ":",
+					"beginCaptures": {
+						"0": { "name": "punctuation.separator.dictionary.key-value.evntjson" }
+					},
+					"end": "(,)|(?=\\})",
+					"endCaptures": {
+						"1": { "name": "punctuation.separator.dictionary.pair.evntjson" }
+					},
+					"name": "meta.structure.dictionary.value.evntjson",
+					"patterns": [
+						{
+							"comment": "object value",
+							"include": "#value"
+						},
+						{
+							"match": "[^\\s,]",
+							"name": "invalid.illegal.expected-dictionary-separator.evntjson"
+						}
+					]
+				},
+				{
+					"match": "[^\\s\\}]",
+					"name": "invalid.illegal.expected-dictionary-separator.evntjson"
+				}
+			]
+		},
+		"stringSingle": {
+			"begin": "[']",
+			"beginCaptures": {
+				"0": { "name": "punctuation.definition.string.begin.evntjson" }
+			},
+			"end": "[']",
+			"endCaptures": {
+				"0": { "name": "punctuation.definition.string.end.evntjson" }
+			},
+			"name": "string.quoted.evntjson",
+			"patterns": [
+				{
+					"match": "(?x:                # turn on extended mode\n                     \\\\                # a literal backslash\n                     (?:               # ...followed by...\n                       [\"\\\\/bfnrt]     # one of these characters\n                       |               # ...or...\n                       u               # a u\n                       [0-9a-fA-F]{4}  # and four hex digits\n                     )\n                   )",
+					"name": "constant.character.escape.evntjson"
+				},
+				{
+					"match": "\\\\.",
+					"name": "invalid.illegal.unrecognized-string-escape.evntjson"
+				}
+			]
+		},
+		"stringDouble": {
+			"begin": "[\"]",
+			"beginCaptures": {
+				"0": { "name": "punctuation.definition.string.begin.evntjson" }
+			},
+			"end": "[\"]",
+			"endCaptures": {
+				"0": { "name": "punctuation.definition.string.end.evntjson" }
+			},
+			"name": "string.quoted.evntjson",
+			"patterns": [
+				{
+					"match": "(?x:                # turn on extended mode\n                     \\\\                # a literal backslash\n                     (?:               # ...followed by...\n                       [\"\\\\/bfnrt]     # one of these characters\n                       |               # ...or...\n                       u               # a u\n                       [0-9a-fA-F]{4}  # and four hex digits\n                     )\n                   )",
+					"name": "constant.character.escape.evntjson"
+				},
+				{
+					"match": "\\\\.",
+					"name": "invalid.illegal.unrecognized-string-escape.evntjson"
+				}
+			]
+		},
+		"stringNlTripple": {
+			"begin": "```\n",
+			"beginCaptures": {
+				"0": { "name": "punctuation.definition.string.begin.evntjson" }
+			},
+			"end": "^```",
+			"endCaptures": {
+				"0": { "name": "punctuation.definition.string.end.evntjson" }
+			},
+			"name": "string.quoted.evntjson",
+			"patterns": [
+			]
+		},
+		"stringSlTripple": {
+			"begin": "```[^\\n]",
+			"beginCaptures": {
+				"0": { "name": "punctuation.definition.string.begin.evntjson" }
+			},
+			"end": "```",
+			"endCaptures": {
+				"0": { "name": "punctuation.definition.string.end.evntjson" }
+			},
+			"name": "string.quoted.evntjson",
+			"patterns": [
+				{
+					"match": "[\\n].*|$",
+					"name": "invalid.illegal.unrecognized-string-escape.evntjson"
+				}
+			]
+		},
+		"key": {
+			"name": "string.key.evntjson",
+			"patterns": [
+				{ "include": "#stringSingle" },
+				{ "include": "#keyDouble" },
+				{
+					"match": "[a-zA-Z0-9_-]",
+					"name": "entity.name.variable.evntjson"
+				}
+			]
+		},
+		"keyDouble": {
+			"begin": "[\"]",
+			"beginCaptures": {
+				"0": { "name": "entity.name.variable.evntjson" }
+			},
+			"end": "[\"]",
+			"endCaptures": {
+				"0": { "name": "entity.name.variable.evntjson" }
+			},
+			"name": "entity.name.variable.evntjson",
+			"patterns": [
+				{
+					"match": "(?x:                # turn on extended mode\n                     \\\\                # a literal backslash\n                     (?:               # ...followed by...\n                       [\"\\\\/bfnrt]     # one of these characters\n                       |               # ...or...\n                       u               # a u\n                       [0-9a-fA-F]{4}  # and four hex digits\n                     )\n                   )",
+					"name": "constant.character.escape.evntjson"
+				},
+				{
+					"match": "\\\\.",
+					"name": "invalid.illegal.unrecognized-string-escape.evntjson"
+				}
+			]
+		},
+		"value": {
+			"comment": "the 'value' diagram at http://json.org",
+			"patterns": [
+				{ "include": "#constant" },
+				{ "include": "#infinity" },
+				{ "include": "#number" },
+				{ "include": "#stringSingle" },
+				{ "include": "#stringDouble" },
+				{ "include": "#stringNlTripple" },
+				{ "include": "#stringSlTripple" },
+				{ "include": "#array" },
+				{ "include": "#object" }
+			]
+		},
+		"comments": {
+			"patterns": [
+				{
+					"match": "/{2}.*",
+					"name": "comment.single.evntjson"
+				},
+				{
+					"match": "\"//comment:.*",
+					"name": "comment.single.evntjson",
+					"comment": "key-value pair containing a comment (a descriptive field)"
+				},
+				{
+					"begin": "/\\*\\*(?!/)",
+					"captures": {
+						"0": { "name": "punctuation.definition.comment.evntjson" }
+					},
+					"end": "\\*/",
+					"name": "comment.block.documentation.evntjson"
+				},
+				{
+					"begin": "/\\*",
+					"captures": {
+						"0": { "name": "punctuation.definition.comment.evntjson" }
+					},
+					"end": "\\*/",
+					"name": "comment.block.evntjson"
+				}
+			]
+		}
+	}
+}
