@@ -1,13 +1,13 @@
 {
-    "name": "vscode-evntjson",
-    "displayName": "EvntJSON syntax",
-    "description": "Adds syntax highlighting of EvntJSON files (NON JSON/JSON5 compatible!)",
-    "version": "1.0.0",
-    "publisher": "mrmlnc",
-    "license": "MIT",
-    "engines": {
-      "vscode": "^1.3.0"
-    },
+  "name": "vscode-evntjson",
+  "displayName": "EvntJSON syntax",
+  "description": "Adds syntax highlighting of EvntJSON files (NON JSON/JSON5 compatible!)",
+  "version": "1.0.1",
+  "publisher": "vmatyi",
+  "license": "MIT",
+  "engines": {
+    "vscode": "^1.3.0"
+  },
   "icon": "icon.png",
   "homepage": "https://github.com/vmatyi/vscode-evntjson/blob/master/README.md",
   "repository": {
@@ -19,16 +19,28 @@
   ],
   "categories": [],
   "contributes": {
-    "languages": [{
-      "id": "evntjson",
-      "aliases": ["EVNTJSON", "evntjson", "EvntJSON"],
-      "extensions": [".json", ".evntjson"],
-      "configuration": "./evntjson.configuration.json"
-    }],
-    "grammars": [{
-      "language": "evntjson",
-      "scopeName": "source.evntjson",
-      "path": "./syntaxes/evntjson.json"
-    }]
+    "languages": [
+      {
+        "id": "evntjson",
+        "aliases": [
+          "EvntJSON",
+          "evntjson",
+          "EVNTJSON"
+        ],
+        "extensions": [
+          ".json",
+          ".json5",
+          ".evntjson"
+        ],
+        "configuration": "./evntjson.configuration.json"
+      }
+    ],
+    "grammars": [
+      {
+        "language": "evntjson",
+        "scopeName": "source.evntjson",
+        "path": "./syntaxes/evntjson.json"
+      }
+    ]
   }
 }

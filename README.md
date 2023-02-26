@@ -13,7 +13,7 @@
 
   * On the bottom-right corner, click on the select language mode button, if you have created a new file it should display Plain Text.
   * Select **EvntJSON** in the list of languages.
-  * Alternatively, saving the file with a `.evntjson` extension, will allow VS Code to understand that it is a EvntJSON file, and automatically select the language correctly.
+  * Alternatively, saving the file with `.evntjson` extension will allow VS Code to identify it automatically.
 
 ### Supported features
 
